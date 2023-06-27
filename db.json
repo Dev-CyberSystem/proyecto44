@@ -1,0 +1,55 @@
+{
+  "users": [
+    {
+      "nombre": "Diego",
+      "apellido": "Olmi",
+      "edad": "36",
+      "password": "123",
+      "id": 1
+    },
+    {
+      "nombre": "Leonardo",
+      "apellido": "Ponzio",
+      "edad": "39",
+      "password": "123",
+      "id": 2
+    },
+    {
+      "nombre": "Juanfer",
+      "apellido": "Quintero",
+      "edad": "32",
+      "password": "123",
+      "id": 3
+    },
+    {
+      "nombre": "Coca",
+      "apellido": "test_55",
+      "edad": "27",
+      "password": "123",
+      "id": 4
+    }
+  ],
+  "productos": [
+    {
+      "producto": "Coca",
+      "precio": "500",
+      "stock": "10",
+      "img": "https://picsum.photos/200/300/?blur",
+      "id": 1
+    },
+    {
+      "producto": "Fernet",
+      "precio": "1501",
+      "stock": "15",
+      "img": "https://picsum.photos/200/300/?blur",
+      "id": 2
+    },
+    {
+      "producto": "hielo",
+      "precio": "50",
+      "stock": "2",
+      "img": "https://picsum.photos/200/300/?blur",
+      "id": 3
+    }
+  ]
+}

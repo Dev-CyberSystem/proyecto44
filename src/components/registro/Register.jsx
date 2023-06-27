@@ -1,0 +1,98 @@
+import { useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import axios from "axios";
+
+const Register = () => {
+  const [dataUser, setDataUser] = useState({
+    nombre: "",
+    apellido: "",
+    edad: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setDataUser({ ...dataUser, [e.target.name]: e.target.value }); // actualizo el estado con el valor del input
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      const response = axios.post("http://localhost:8080/users", dataUser);
+      console.log(response);
+      setDataUser({ nombre: "", apellido: "", edad: "", password: "" });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <>
+      <Container>
+        <Row>
+          <Col>
+          <h1>Registro</h1>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label htmlFor="nombre" className="form-label">
+                  Nombre
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={dataUser.nombre}
+                  onChange={handleChange}
+                  name="nombre"
+                  aria-describedby="nombre"
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="apellido" className="form-label">
+                  Apellido
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={dataUser.apellido}
+                  onChange={handleChange}
+                  name="apellido"
+                  aria-describedby="apellido"
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="edad" className="form-label">
+                  Edad
+                </label>
+                <input
+                  type="number"
+                  className="form-control"
+                  value={dataUser.edad}
+                  onChange={handleChange}
+                  name="edad"
+                  aria-describedby="edad"
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="password" className="form-label">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  className="form-control"
+                  value={dataUser.password}
+                  onChange={handleChange}
+                  name="password"
+                  aria-describedby="password"
+                />
+              </div>
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
+            </form>
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
+};
+
+export default Register;
