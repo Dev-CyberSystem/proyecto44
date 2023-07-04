@@ -10,7 +10,6 @@ function App() {
     <UsersContext>
       <ProductsContext>
         <Header />
-        <h1>Home</h1>
         <Rutas />
       </ProductsContext>
     </UsersContext>

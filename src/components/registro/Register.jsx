@@ -7,6 +7,7 @@ const Register = () => {
     nombre: "",
     apellido: "",
     edad: "",
+    email: "",
     password: "",
   });
 
@@ -19,7 +20,7 @@ const Register = () => {
     try {
       const response = axios.post("http://localhost:8080/users", dataUser);
       console.log(response);
-      setDataUser({ nombre: "", apellido: "", edad: "", password: "" });
+      setDataUser({ nombre: "", apellido: "", edad: "", email: "", password: "" });
     } catch (error) {
       console.log(error);
     }
@@ -69,6 +70,19 @@ const Register = () => {
                   onChange={handleChange}
                   name="edad"
                   aria-describedby="edad"
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  className="form-control"
+                  value={dataUser.email}
+                  onChange={handleChange}
+                  name="email"
+                  aria-describedby="email"
                 />
               </div>
               <div className="mb-3">
