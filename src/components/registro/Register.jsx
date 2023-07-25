@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import Swal from "sweetalert2";
 import axios from "axios";
 
 const Register = () => {
   const [dataUser, setDataUser] = useState({
     nombre: "",
     apellido: "",
-    edad: "",
     email: "",
     password: "",
+    rol: "usuario",
   });
 
   const handleChange = (e) => {
@@ -20,7 +21,16 @@ const Register = () => {
     try {
       const response = axios.post("http://localhost:8080/users", dataUser);
       console.log(response);
-      setDataUser({ nombre: "", apellido: "", edad: "", email: "", password: "" });
+      setDataUser({ nombre: "", apellido: "", email: "", password: "", rol: "usuario" });
+      Swal.fire({
+        icon: "success",
+        title: "Usuario registrado",
+        showConfirmButton: false,
+        timer: 3500,
+      });
+
+      window.location.href = "/login";
+
     } catch (error) {
       console.log(error);
     }
@@ -60,19 +70,6 @@ const Register = () => {
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="edad" className="form-label">
-                  Edad
-                </label>
-                <input
-                  type="number"
-                  className="form-control"
-                  value={dataUser.edad}
-                  onChange={handleChange}
-                  name="edad"
-                  aria-describedby="edad"
-                />
-              </div>
-              <div className="mb-3">
                 <label htmlFor="email" className="form-label">
                   Email
                 </label>
@@ -96,6 +93,19 @@ const Register = () => {
                   onChange={handleChange}
                   name="password"
                   aria-describedby="password"
+                />
+              </div>
+              <div className="mb-3">
+                {/* <label htmlFor="rol" className="form-label">
+                  rol
+                </label> */}
+                <input
+                  type="hidden"
+                  className="form-control"
+                  value={dataUser.rol}
+                  onChange={handleChange}
+                  name="rol"
+                  aria-describedby="rol"
                 />
               </div>
               <button type="submit" className="btn btn-primary">

@@ -3,35 +3,32 @@
     {
       "nombre": "Diego",
       "apellido": "Olmi",
-      "edad": "36",
-      "email": "d@gmail.com",
+      "email": "burrito@gmail.com",
       "password": "123",
       "id": 1
     },
     {
-      "nombre": "Leonardo",
-      "apellido": "Ponzio",
-      "edad": "39",
-      "email": "l@gmail.com",
+      "nombre": "admin",
+      "apellido": "admin",
+      "email": "admin@admin.com",
       "password": "123",
       "id": 2
     },
     {
-      "nombre": "Juanfer",
-      "apellido": "Quintero",
-      "edad": "32",
-      "email": "j@gmail.com",
+      "nombre": "Natalia",
+      "apellido": "Acevedo",
+      "email": "natyacvedo@gmail.com",
       "password": "123",
       "id": 3
     }
   ],
   "productos": [
     {
-      "producto": "Chicle",
-      "precio": "41",
-      "stock": "12",
-      "img": "https://picsum.photos/200/300/?blur",
-      "id": 5
+      "id": 2,
+      "stock": 4526,
+      "producto": "Cocadd",
+      "precio": "151",
+      "img": "https://picsum.photos/200"
     }
   ]
 }

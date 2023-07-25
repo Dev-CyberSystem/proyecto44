@@ -1,64 +1,63 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
-export const ProductosContext = createContext(); //creamos el contexto
+export const ProductosContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 const ProductsContext = ({ children }) => {
-  //vamos a poner todo el crud de productos
   const [productos, setProductos] = useState([]);
 
-  //get ----> trae todos los productos
-  const getProducts = async () => {
+  const getProductos = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/productos");
-      console.log(response.data);
+      const response = await axios.get("http://localhost:8001/api/canchas");
       setProductos(response.data);
+      console.log(response)
     } catch (error) {
       console.log(error);
     }
   };
 
-  //post ----> crea un producto
-
-  const addProduct = (producto) => {
+  const addProducto = async (producto) => {
     try {
-      const response = axios.post("http://localhost:8080/productos", producto);
-      setProductos([...productos, response]);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  //put ----> edita un producto
-
-  const updateProductos = async (producto) => {
-    try {
-      await axios.put(
-        `http://localhost:8080/productos/${producto.id}`,
+      const response = await axios.post(
+        "http://localhost:8001/api/canchas",
         producto
       );
-      await getProducts();
+      setProductos([...productos, response.data]);
     } catch (error) {
       console.log(error);
     }
   };
 
-  //delete ----> borra un producto
-
-  const deleteProduct = async (id) => {
-    console.log(id);
+  const deleteProducto = async (id) => {
+    console.log(id, "deleteProducto")
     try {
-      await axios.delete(`http://localhost:8080/productos/${id}`);
-      const deleteProduct = productos.filter((producto) => producto.id !== id);
-      setProductos(deleteProduct);
+      await axios.delete(`http://localhost:8001/api/canchas/${id}`);
+      const newProductos = productos.filter((producto) => producto._id !== id);
+      setProductos(newProductos);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateProducto = async (updatedProduct) => {
+    console.log(updatedProduct, "updateProducto")
+    try {
+      await axios.put(
+        `http://localhost:8001/api/canchas/${updatedProduct._id}`,
+        updatedProduct
+      );
+      const newProductos = productos.map((producto) =>
+        producto._id === updatedProduct._id ? updatedProduct : producto
+      );
+      setProductos(newProductos);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getProducts();
+    getProductos(); 
   }, []);
 
   return (
@@ -66,9 +65,9 @@ const ProductsContext = ({ children }) => {
       value={{
         productos,
         setProductos,
-        addProduct,
-        deleteProduct,
-        updateProductos,
+        addProducto,
+        deleteProducto,
+        updateProducto,
       }}
     >
       {children}

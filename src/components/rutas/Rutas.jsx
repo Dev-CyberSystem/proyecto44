@@ -2,32 +2,22 @@ import { Routes, Route } from "react-router-dom";
 import Register from "../registro/Register";
 import FormAddProductos from "../productos/FormAddProductos";
 import UserCard from "../userCard/UserCard";
-import Administracion from "../../pages/Administracion";
-import Tienda from "../../pages/tienda/Tienda";
-import Login from "../login/Login";
-import Home from "../../pages/home/Home";
+import Tienda from "../pages/tienda/tienda";
+import Home from "../pages/home/Home";
+import Administrador from "../pages/administrador/Administrador";
+import Login from "../pages/login/Login";
 
-const usuarioLogueado = JSON.parse(localStorage.getItem("user"));
 
-console.log(usuarioLogueado, "usuarioLogueado")
 const Rutas = () => {
   return (
     <Routes>
-      {usuarioLogueado != null ? (
-        <>
-          
-          <Route path="/addProducto" element={<FormAddProductos />} />
-          <Route path="/users" element={<UserCard />} />
-          <Route path="/tienda" element={<Tienda />} />
-          <Route path="/administracion" element={<Administracion />} />
-        </>
-      ) : (
-        <>
-          <Route path="/registro" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
-        </>
-      )}
+      <Route path="/" element={<Home />} />
+      <Route path="/registro" element={<Register />} />
+      <Route path="/addProducto" element={<FormAddProductos />} />
+      <Route path="/users" element={<UserCard />} />
+      <Route path="/tienda" element={<Tienda />} />
+      <Route path="/admin" element={<Administrador />} />
+      <Route path="/login" element={<Login />} />
     </Routes>
   );
 };

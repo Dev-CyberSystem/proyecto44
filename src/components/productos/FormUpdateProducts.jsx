@@ -1,40 +1,25 @@
-import { useState, useContext } from "react";
-import { Col, Container, Row, Button } from "react-bootstrap";
-import { ProductosContext } from "../../context/ProductsContext";
+import { useState } from "react";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 
-// import axios from "axios";
+// eslint-disable-next-line react/prop-types
+const FormUpdateProducts = ({ editProduct, updateProducto, handleClose }) => {
+  const [producto, setProducto] = useState(editProduct); // producto a editar
 
-const FormAddProductos = () => {
-  const { addProducto } = useContext(ProductosContext);
-
-  const [productos, setProductos] = useState({
-    nombre: "",
-    capacidad: "",
-    club: "",
-    direccion: "",
-  });
-
-  const handleChange = (e) => {
-    setProductos({ ...productos, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
-    addProducto(productos);
+    updateProducto(producto); // producto a editar con los nuevos datos actualizados del form de abajo 
     Swal.fire({
-      position: "center",
       icon: "success",
-      title: "Producto agregado",
+      title: "Producto Actualizado",
       showConfirmButton: false,
       timer: 1500,
     });
-    setProductos({
-      nombre: "",
-      capacidad: "",
-      club: "",
-      direccion: "",
-    });
+    handleClose();
+  };
+
+  const handleChange = (e) => {
+    setProducto({ ...producto, [e.target.name]: e.target.value }); // producto a editar con los nuevos datos actualizados del form de abajo 
   };
 
   return (
@@ -42,7 +27,7 @@ const FormAddProductos = () => {
       <Container>
         <Row>
           <Col>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleUpdate}>
               <div className="mb-3">
                 <label htmlFor="nombre" className="form-label">
                   nombre
@@ -50,7 +35,7 @@ const FormAddProductos = () => {
                 <input
                   type="text"
                   className="form-control"
-                  value={productos.nombre}
+                  value={producto.nombre || ""} 
                   onChange={handleChange}
                   name="nombre"
                   aria-describedby="nombre"
@@ -63,10 +48,10 @@ const FormAddProductos = () => {
                 <input
                   type="number"
                   className="form-control"
-                  value={productos.capacidad}
+                  value={producto.capacidad || ""}
                   onChange={handleChange}
                   name="capacidad"
-                  aria-describedby="capacidad"
+                  aria-describedby="precio"
                 />
               </div>
               <div className="mb-3">
@@ -76,7 +61,7 @@ const FormAddProductos = () => {
                 <input
                   type="text"
                   className="form-control"
-                  value={productos.club}
+                  value={producto.club || ""}
                   onChange={handleChange}
                   name="club"
                   aria-describedby="club"
@@ -89,7 +74,7 @@ const FormAddProductos = () => {
                 <input
                   type="text"
                   className="form-control"
-                  value={productos.direccion}
+                  value={producto.direccion || ""}
                   onChange={handleChange}
                   name="direccion"
                   aria-describedby="direccion"
@@ -97,8 +82,7 @@ const FormAddProductos = () => {
               </div>
 
               <Button type="submit" variant="outline-success">
-                {" "}
-                Agregar Club{" "}
+                Agregar Producto
               </Button>
             </form>
           </Col>
@@ -108,4 +92,4 @@ const FormAddProductos = () => {
   );
 };
 
-export default FormAddProductos;
+export default FormUpdateProducts;
