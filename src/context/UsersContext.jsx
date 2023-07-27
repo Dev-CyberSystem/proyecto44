@@ -27,12 +27,27 @@ const UsersContext = ({ children }) => {
       email,
       password,
     });
-    // console.log(response.data.data.token);
+
     const jwtToken = response.data.data.token;
     const jwtDecode = jwt_decode(jwtToken);
-    console.log(jwtDecode);
 
-    setUserLogueado(jwtDecode);
+    const user = {
+      id: jwtDecode.id,
+      nombre: jwtDecode.nombre,
+      apellido: jwtDecode.apellido,
+      email: jwtDecode.email,
+      rol: jwtDecode.rol,
+    };
+
+    localStorage.setItem("user", JSON.stringify(user));
+    setUserLogueado(user);
+    console.log(user);
+
+    if (user.rol === "admin") {
+      window.location.href = "/admin";
+    } else {
+      window.location.href = "/";
+    }
   };
 
   const logout = () => {
